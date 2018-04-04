@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>django test</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/style.css' %}">
+	<script src="{% static 'myapp/js/main.js' %}"></script>
+</head>
+<body>
+	<h1>this is a template page</h1>
+	<button id="btn1">Button</button>
+	<img id="img1" src=" {% static 'myapp/images/bike.jpg' %}">
+	
+	
+</body>
+</html>
