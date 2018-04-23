@@ -1,0 +1,189 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>postgresql test</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+
+
+		{% if data %}
+			{% for city in data %}
+				<div class="card w-50">
+				  <div class="card-body">
+				    <h5 class="card-title">{{ city.location }} {{ city.temp }}℃</h5>
+				    <p class="card-text">{{ city.text }}</p>
+				    <a href="#" class="btn btn-primary">更新</a>
+				  </div>
+				</div>
+
+				<div>
+					 
+				</div>
+			{% endfor %}
+		{% endif %}
+		
+
+	</div>
+
+
+
+	<script type="text/javascript">
+		$('#next').click(function(e){
+			e.preventDefault();	//阻止网页刷新
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'next' %}",
+				data: {
+					name: '33',
+				},
+				success: function(context){
+					console.log('success');
+					$("#h22").text(context['data'][0]['name']);
+				}
+			});
+			console.log('no refresh');
+		});
+
+
+		var test = function(text){
+			$('#h22').text(text);
+			console.log(text);
+		}
+		function test1(){
+			// var list = [
+			// 		{% for item in data %}
+		 // 				'{{ item.name }}', '{{ item.place }}',
+			// 		{% endfor %}
+			// ]
+			// console.log('this is a test');
+			
+			// console.log(list)
+			// $("#h22").html(list[0])
+			
+		}
+
+		
+	</script>
+</body>
+</html>
+ -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>postgresql test</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+
+
+	<!-- jQuery Core 3.3.1 uncompressed cdn -->
+	<script
+	  src="http://code.jquery.com/jquery-3.3.1.js"
+	  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	  crossorigin="anonymous"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</head>
+
+  <body>
+
+    <main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-5">城市天气</h1>
+          <div class="input-group">
+			  <input id="city-input" type="text" class="form-control" placeholder="例: 南通 nantong " aria-label="Recipient's username" aria-describedby="basic-addon2">
+			  <div class="input-group-append">
+			    <button id="add-city" class="btn btn-success" type="submit">添加</button>
+			    <button id="delete-city" class="btn btn-danger" type="button">删除</button>
+			  </div>
+			</div>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          {% if data %}
+			{% for city in data %}
+				<div class="col-md-4">
+	              <div class="card mb-4 box-shadow">
+	                <div class="card-body">
+	                  <h5 class="card-title">{{ city.location }} {{ city.temp }}℃</h5>
+				      <p class="card-text">{{ city.text }}</p>
+	                  <div class="d-flex justify-content-between align-items-center">	                    
+	                    <button type="button" class="btn btn-primary">更新</button>                    
+	                    <small class="text-muted">{{ city.last_update }}</small>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+				
+			{% endfor %}
+		  {% endif %}
+        </div>
+
+
+
+        <hr>
+
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer class="container">
+      <p>&copy; Gulf tech 2017-2018</p>
+    </footer>
+
+    <script type="text/javascript">
+		$('#add-city').click(function(e){
+			e.preventDefault();	//阻止网页刷新
+			var city = document.querySelector('#city-input').value;
+			// console.log('hello' + city);
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'add_city' %}",
+				data: {
+					city: city,
+				},
+				success: function(context){
+					console.log('add city success');
+					// $("#h22").text(context['data'][0]['name']);
+				}
+			});
+			
+		});
+
+		$('#delete-city').click(function(e){
+			e.preventDefault();	//阻止网页刷新
+			var city = document.querySelector('#city-input').value;
+			// console.log('hello' + city);
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'delete_city' %}",
+				data: {
+					city: city,
+				},
+				success: function(context){
+					console.log('delete city success');
+					// $("#h22").text(context['data'][0]['name']);
+				}
+			});
+			
+		});
+		
+	</script>
+
+  </body>
+</html>

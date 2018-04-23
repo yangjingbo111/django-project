@@ -15,10 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth.models import User
+from rest_framework import routers
+from orderMenu import views
+
+# Router provide an easy way of automatically determing the URL conf
+router = routers.DefaultRouter()
+router.register(r'api/users', views.UserViewSet)
+router.register(r'api/groups', views.GroupViewSet)
+router.register(r'api/foods', views.FoodViewSet)
+
+# wire up our API using automatic URL routing.
+# Additionally, we include login URLS for the browserable API
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),    
+    path('api-auth/', include('rest_framework.urls', namespace = 'rest_framework')),
     path('hello/', include('myapp.urls')),
     path('food/', include('orderMenu.urls')),
+    path('camera/', include('camera.urls')),
+    path('map/', include('map.urls')),
+    path('audio/', include('audio.urls')),
+    path('postgresql_test/', include('postgresql_test.urls')),
 ]
+

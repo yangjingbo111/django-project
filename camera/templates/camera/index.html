@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>camera test</title>
+</head>
+<body>
+	<div>
+		<img src="{% url 'stream' %}" height="600" width="800">	
+		<h3>this is a live video and audio stream</h3>
+		<audio controls autoplay>
+		<source src="http://192.168.1.12:8080/stream" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
+	</div>
+	
+	<!-- <div>
+		<img src="{% url 'stream' %}" height="300" width="400">	
+		<h3>this is a live video 2</h3>
+	</div> -->
+	
+	</div>
+</body>
+</html>

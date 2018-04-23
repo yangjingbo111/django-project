@@ -1,0 +1,63 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>map test</title>
+	<style type="text/css">
+		#map1 {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background: rgba(51,51,51,0.7);
+			z-index: 10;
+		}
+	</style>
+</head>
+<body>
+	<div id="map1" >
+		<iframe 
+			width="1920"
+			height="1080"
+			frameborder="0" style="border:0"
+			src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCQacZiNEWj7UOTgBmdmUBVbE7_GBK6U1M
+			&q=Space+Needle,Seattle+WA" allowfullscreen>
+		</iframe>	
+	</div>
+	
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Ma75g0YlUzm3O4WKaAgOBxtMiyikDjOK"></script>
+	<title>地图展示</title>
+</head>
+<body>
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");    // 创建Map实例
+	var point = new BMap.Point(116.404, 39.915);
+	map.centerAndZoom(point, 11);  // 初始化地图,设置中心点坐标和地图级别
+	//添加地图类型控件
+	map.addControl(new BMap.MapTypeControl({
+		mapTypes:[
+            BMAP_NORMAL_MAP,
+            BMAP_HYBRID_MAP
+        ]}));	  
+	map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+	var marker = new BMap.Marker(point);
+	map.addOverlay(marker);
+
+</script>
